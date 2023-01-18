@@ -4,12 +4,12 @@ import bcrpty from "bcrypt"
 
 export const register = async function (req, res) {
   try {
-    const { password, email, username } = req.body
+    const { password, email, name } = req.body
     const salt = await bcrpty.genSalt(10)
     const hash = await bcrpty.hash(password, salt)
 
     const newUser = new UserModel({
-      name: username,
+      userName: name,
       email: email,
       passwordHash: hash,
     })
