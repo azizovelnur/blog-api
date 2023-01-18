@@ -5,6 +5,7 @@ import {
   updatePost,
   getOnePost,
   getPosts,
+  getPostComments,
 } from "../controllers/postsController.js"
 import { checkAuth } from "../utils/checkAuth.js"
 import { handleValidationErrors } from "../validations/handleValidationErrors.js"
@@ -28,4 +29,5 @@ postsRouter.patch(
 postsRouter.delete("/:id", checkAuth, deletePost)
 postsRouter.get("/", getPosts)
 postsRouter.get("/:id", getOnePost)
+postsRouter.get("/comments/:id", getPostComments)
 export { postsRouter }

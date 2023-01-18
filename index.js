@@ -7,6 +7,7 @@ import multer from "multer"
 import { authRouter } from "./routes/authRouter.js"
 import { checkAuth } from "./utils/checkAuth.js"
 import { postsRouter } from "./routes/postsRouter.js"
+import { commentsRouter } from "./routes/commentsRouter.js"
 
 const app = express()
 dotenv.config()
@@ -14,6 +15,7 @@ app.use(json())
 app.use(cors())
 app.use("/auth", authRouter)
 app.use("/posts", postsRouter)
+app.use("/comments", commentsRouter)
 
 //console fix error
 mongoose.set("strictQuery", true)

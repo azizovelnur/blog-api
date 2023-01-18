@@ -1,6 +1,5 @@
+import CommentsModel from "../models/CommentsModel.js"
 import PostModel from "../models/PostModel.js"
-import jsonwebtoken from "jsonwebtoken"
-import bcrpty from "bcrypt"
 
 export const createPost = async function (req, res) {
   try {
@@ -123,5 +122,20 @@ export const updatePost = async function (req, res) {
     res.status(500).json({
       message: "error update post",
     })
+  }
+}
+
+export const getPostComments = async (req, res) => {
+  try {
+    const postId = req.params.id
+    const post = await PostModel.findById(postId)
+    const list = await Promise.all(
+      post.comments.map((comment) => {
+        return CommentsModel.findById(comment)
+      })
+    )
+    res.json(list)
+  } catch (error) {
+    res.json({ message: "Что-то пошло не так." })
   }
 }
