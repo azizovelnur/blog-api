@@ -7,6 +7,7 @@ export const createPost = async function (req, res) {
     const newPost = new PostModel({
       title: req.body.title,
       text: req.body.text,
+      imageUrl: req.body.imageUrl,
       user: req.userId,
     })
     const post = await newPost.save()
@@ -108,6 +109,8 @@ export const updatePost = async function (req, res) {
       },
       {
         title: req.body.title,
+        imageUrl: req.body.imageUrl,
+        user: req.userId,
         text: req.body.text,
       }
     )
