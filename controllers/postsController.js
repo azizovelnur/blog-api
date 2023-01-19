@@ -34,6 +34,28 @@ export const getPosts = async function (req, res) {
   }
 }
 
+export const getPopularPosts = async function (req, res) {
+  try {
+    const popularPosts = await PostModel.find().limit(5).sort("-viewsCount")
+    res.json(popularPosts)
+  } catch (error) {
+    res.json({ message: "error popular posts" })
+  }
+}
+
+export const searchPost = async function (req, res) {
+  try {
+    const searchValue = req.params.query
+    const posts = await PostModel.find({ title: searchValue })
+    res.json(posts)
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({
+      message: "error search post",
+    })
+  }
+}
+
 export const getOnePost = async function (req, res) {
   try {
     const postId = req.params.id
