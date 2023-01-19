@@ -21,7 +21,10 @@ export const createPost = async function (req, res) {
 
 export const getPosts = async function (req, res) {
   try {
-    const posts = await PostModel.find().populate("user").exec()
+    const posts = await PostModel.find()
+      .populate("user")
+      .sort({ createdAt: -1 })
+      .exec()
     res.json(posts)
   } catch (e) {
     console.log(e)
