@@ -6,7 +6,7 @@ import {
   getOnePost,
   getPosts,
   getPostComments,
-  searchPost,
+  // searchPost,
   getPopularPosts,
 } from "../controllers/postsController.js"
 import { checkAuth } from "../utils/checkAuth.js"
@@ -32,6 +32,6 @@ postsRouter.delete("/:id", checkAuth, deletePost)
 postsRouter.get("/", getPosts)
 postsRouter.get("/popular", getPopularPosts)
 postsRouter.get("/:id", getOnePost)
-postsRouter.get("/search/:query", searchPost)
+// postsRouter.get("/search/:query", searchPost)
 postsRouter.get("/comments/:id", getPostComments)
 export { postsRouter }

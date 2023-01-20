@@ -43,18 +43,20 @@ export const getPopularPosts = async function (req, res) {
   }
 }
 
-export const searchPost = async function (req, res) {
-  try {
-    const searchValue = req.params.query
-    const posts = await PostModel.find({ title: searchValue })
-    res.json(posts)
-  } catch (e) {
-    console.log(e)
-    res.status(500).json({
-      message: "error search post",
-    })
-  }
-}
+// export const searchPost = async function (req, res) {
+//   try {
+//     const searchValue = req.params.query
+//     const posts = await PostModel.find({ title: searchValue })
+//       .populate("user")
+//       .exec()
+//     res.json(posts)
+//   } catch (e) {
+//     console.log(e)
+//     res.status(500).json({
+//       message: "error search post",
+//     })
+//   }
+// }
 
 export const getOnePost = async function (req, res) {
   try {
