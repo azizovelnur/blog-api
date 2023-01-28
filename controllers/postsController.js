@@ -163,6 +163,6 @@ export const getPostComments = async (req, res) => {
     )
     res.json(list)
   } catch (error) {
-    res.json({ message: "Что-то пошло не так." })
+    res.json({ message: "Something went wrong" })
   }
 }

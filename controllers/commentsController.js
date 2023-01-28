@@ -5,8 +5,7 @@ export const createComment = async (req, res) => {
   try {
     const { postId, comment } = req.body
 
-    if (!comment)
-      return res.json({ message: "Комментарий не может быть пустым" })
+    if (!comment) return res.json({ message: "The comment cannot be empty" })
 
     const newComment = new Comment({ comment })
     await newComment.save()
@@ -21,6 +20,6 @@ export const createComment = async (req, res) => {
 
     res.json(newComment)
   } catch (error) {
-    res.json({ message: "Что-то пошло не так." })
+    res.json({ message: "Something went wrong" })
   }
 }
