@@ -36,7 +36,10 @@ export const getPosts = async function (req, res) {
 
 export const getPopularPosts = async function (req, res) {
   try {
-    const popularPosts = await PostModel.find().limit(5).sort("-viewsCount")
+    const popularPosts = await PostModel.find()
+      .populate("user")
+      .limit(5)
+      .sort("-viewsCount")
     res.json(popularPosts)
   } catch (error) {
     res.json({ message: "error popular posts" })
@@ -85,7 +88,7 @@ export const getOnePost = async function (req, res) {
         }
         res.json(post)
       }
-    )
+    ).populate("user")
   } catch (e) {
     console.log(e)
     res.status(500).json({
