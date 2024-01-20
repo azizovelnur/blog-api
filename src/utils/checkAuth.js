@@ -5,7 +5,7 @@ export const checkAuth = (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, "secretId")
-      req.userId = decoded._id
+      req.userId = decoded.id
       next()
     } catch (err) {
       return res.status(402).json({
@@ -14,7 +14,7 @@ export const checkAuth = (req, res, next) => {
     }
   } else {
     return res.status(403).json({
-      message: "access denied",
+      message: "access denied from checkAuth",
     })
   }
 }
