@@ -22,7 +22,7 @@ export const createPost = async (req, res) => {
 export const getPosts = async (req, res) => {
   try {
     const posts = await prisma.post.findMany({
-      include: { user: true },
+      include: { user: true, comments: true },
       orderBy: { createdAt: "desc" },
     })
     res.json(posts)
@@ -35,7 +35,7 @@ export const getPosts = async (req, res) => {
 export const getPopularPosts = async (req, res) => {
   try {
     const popularPosts = await prisma.post.findMany({
-      include: { user: true },
+      include: { user: true, comments: true },
       take: 5,
       orderBy: { viewCount: "desc" },
     })
@@ -53,7 +53,7 @@ export const getOnePost = async (req, res) => {
     const updatedPost = await prisma.post.update({
       where: { id: postId },
       data: { viewCount: { increment: 1 } },
-      include: { user: true },
+      include: { user: true, comments: true },
     })
 
     if (!updatedPost) {
@@ -124,6 +124,6 @@ export const getPostComments = async (req, res) => {
     res.json(comments)
   } catch (error) {
     console.error(error)
-    res.json({ message: "Something went wrong" })
+    res.json({ message: "Something went wrong in postsController" })
   }
 }

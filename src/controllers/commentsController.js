@@ -30,24 +30,15 @@ export const createComment = async (req, res) => {
 
 export const deleteComment = async (req, res) => {
   try {
-    const updatedPost = await prisma.post.update({
-      where: { id: parseInt(req.params.postId) },
-      data: {
-        comments: { disconnect: { id: parseInt(req.params.commentId) } },
-      },
-    })
-
-    if (!updatedPost) {
-      return res.status(400).send("Post not found")
-    }
-
     await prisma.comment.delete({
       where: { id: parseInt(req.params.commentId) },
     })
 
     res.json({ message: "Success" })
   } catch (error) {
-    console.error(error)
-    res.status(500).json({ message: "Something went wrong" })
+    console.error(error + "Something went wrong in commentsController")
+    res
+      .status(500)
+      .json({ message: "Something went wrong in commentsController" })
   }
 }
