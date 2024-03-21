@@ -7,6 +7,6 @@ import {
 const commentsRouter = new Router()
 
 commentsRouter.post("/:id", checkAuth, createComment)
-commentsRouter.delete("/:commentId", checkAuth, deleteComment)
+commentsRouter.delete("/:postId/:commentId", checkAuth, deleteComment)
 
 export { commentsRouter }
